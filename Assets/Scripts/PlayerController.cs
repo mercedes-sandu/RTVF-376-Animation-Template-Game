@@ -1,14 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform feetTransform;
-    
+
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
 
     [SerializeField] private KeyCode actionKey = KeyCode.E;
-    
+
+    [SerializeField] private float turnTime;
+
     private Rigidbody _rb;
 
     private float _horizontal;
@@ -17,11 +20,15 @@ public class PlayerController : MonoBehaviour
     private bool _facingRight = true;
 
     private int _groundMask;
-    
+    private static readonly Vector3 GroundCheckSize = new(1.0f, 0.1f, 1.0f);
+
     private Animator _anim;
     private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
     private static readonly int Moving = Animator.StringToHash("moving");
     private static readonly int ActionTrigger = Animator.StringToHash("actionTrigger");
+
+    private bool _turnCoroutineRunning = false;
+    private Coroutine _turnCoroutine;
 
     /// <summary>
     /// Gets Rigidbody and Animator components. Assigns the ground layer mask.
@@ -30,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
-        
+
         _groundMask = LayerMask.GetMask("Ground");
     }
 
@@ -52,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-    
+
     /// <summary>
     /// Assigns the horizontal input value to _horizontal and sets the moving bool in the animator.
     /// </summary>
@@ -69,9 +76,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpCheck()
     {
-        _isGrounded = Physics.CheckSphere(feetTransform.position, 0.1f, _groundMask);
+        _isGrounded = Physics.CheckBox(feetTransform.position, GroundCheckSize, Quaternion.identity, 
+            _groundMask);
         _anim.SetBool(IsGrounded, _isGrounded);
-        
+
         if (!_isGrounded) return;
         _anim.ResetTrigger(ActionTrigger);
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W))
@@ -88,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (!Input.GetKeyDown(actionKey)) return;
         _anim.SetTrigger(ActionTrigger);
     }
-    
+
     /// <summary>
     /// Sets the player's velocity to move them horizontally.
     /// </summary>
@@ -104,6 +112,35 @@ public class PlayerController : MonoBehaviour
     {
         if ((!_facingRight || !(_horizontal < 0)) && (_facingRight || !(_horizontal > 0))) return;
         _facingRight = !_facingRight;
-        transform.Rotate(0, 180, 0);
+        Turn();
+    }
+    
+    /// <summary>
+    /// Stops any existing coroutines and starts a new one to turn the player.
+    /// </summary>
+    private void Turn()
+    {
+        if (_turnCoroutineRunning) StopCoroutine(_turnCoroutine);
+        _turnCoroutine = StartCoroutine(TurnCoroutine());
+    }
+
+    /// <summary>
+    /// Turns the player to face the opposite direction.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator TurnCoroutine()
+    {
+        _turnCoroutineRunning = true;
+        var startRotation = transform.rotation;
+        var endRotation = Quaternion.Euler(0, _facingRight ? 90 : 270, 0);
+        var time = 0f;
+        while (time < turnTime)
+        {
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, time / turnTime);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.rotation = endRotation;
+        _turnCoroutineRunning = false;
     }
 }

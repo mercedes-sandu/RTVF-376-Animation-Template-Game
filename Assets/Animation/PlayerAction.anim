@@ -43,8 +43,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.r
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -73,8 +73,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.g
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -103,8 +103,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.b
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -133,8 +133,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.a
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   m_PPtrCurves: []
@@ -146,37 +146,37 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 2130448956
       attribute: 1303350129
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 2130448956
       attribute: 1571785585
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 2130448956
       attribute: 1840221041
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 2130448956
       attribute: 2108656497
       script: {fileID: 0}
-      typeID: 23
+      typeID: 137
       customType: 22
       isPPtrCurve: 0
       isIntCurve: 0
@@ -229,8 +229,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.r
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -259,8 +259,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.g
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -289,8 +289,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.b
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   - serializedVersion: 2
@@ -319,8 +319,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._Color.a
-    path: 
-    classID: 23
+    path: Mesh_Gaw
+    classID: 137
     script: {fileID: 0}
     flags: 16
   m_EulerEditorCurves: []
