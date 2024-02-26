@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private const float SpeedThreshold = 0.1f;
     private bool _isGrounded = true;
     private bool _facingRight = true;
+    private float _startRotationY;
 
     private int _groundMask;
     private static readonly Vector3 GroundCheckSize = new(1.0f, 0.1f, 1.0f);
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         _groundMask = LayerMask.GetMask("Ground");
+
+        _startRotationY = transform.rotation.eulerAngles.y;
     }
 
     /// <summary>
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpCheck()
     {
-        _isGrounded = Physics.CheckBox(feetTransform.position, GroundCheckSize, Quaternion.identity, 
+        _isGrounded = Physics.CheckBox(feetTransform.position, GroundCheckSize, Quaternion.identity,
             _groundMask);
         _anim.SetBool(IsGrounded, _isGrounded);
 
@@ -114,7 +117,7 @@ public class PlayerController : MonoBehaviour
         _facingRight = !_facingRight;
         Turn();
     }
-    
+
     /// <summary>
     /// Stops any existing coroutines and starts a new one to turn the player.
     /// </summary>
@@ -132,7 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         _turnCoroutineRunning = true;
         var startRotation = transform.rotation;
-        var endRotation = Quaternion.Euler(0, _facingRight ? 90 : 270, 0);
+        var endRotation = Quaternion.Euler(0, _facingRight ? _startRotationY : _startRotationY + 180, 0);
         var time = 0f;
         while (time < turnTime)
         {
@@ -140,6 +143,7 @@ public class PlayerController : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+
         transform.rotation = endRotation;
         _turnCoroutineRunning = false;
     }
