@@ -5959,6 +5959,7 @@ MonoBehaviour:
   jumpForce: 6
   actionKey: 101
   turnTime: 0.2
+  groundCheckSize: {x: 1, y: 0.2, z: 1}
 --- !u!54 &1268872645
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float turnTime;
 
+    [SerializeField] private Vector3 groundCheckSize;
+
     private Rigidbody _rb;
 
     private float _horizontal;
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private float _startRotationY;
 
     private int _groundMask;
-    private static readonly Vector3 GroundCheckSize = new(1.0f, 0.1f, 1.0f);
 
     private Animator _anim;
     private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpCheck()
     {
-        _isGrounded = Physics.CheckBox(feetTransform.position, GroundCheckSize, Quaternion.identity,
+        _isGrounded = Physics.CheckBox(feetTransform.position, groundCheckSize, Quaternion.identity,
             _groundMask);
         _anim.SetBool(IsGrounded, _isGrounded);
 
