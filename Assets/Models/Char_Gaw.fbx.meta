@@ -3,7 +3,32 @@ guid: f81de61f6f0470e4bbd1d873ceb6c8e9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Bandana
+    second: {fileID: 2100000, guid: 3cb389646e3453c478669c949176c1a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Boot
+    second: {fileID: 2100000, guid: 3f70e8b9780697043bfb870e803ad76a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Gaw
+    second: {fileID: 2100000, guid: 2bf1b760b692bda49b1be392e66d236f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Shield
+    second: {fileID: 2100000, guid: a8d09a0c286ba504484801e5b6ded132, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Sword
+    second: {fileID: 2100000, guid: e6d8e354c5a1e3246aa0ebd5a366a904, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -99,7 +124,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
