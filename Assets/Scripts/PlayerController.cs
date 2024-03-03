@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private const float SpeedThreshold = 0.1f;
     private bool _isGrounded = true;
     private bool _facingRight = true;
-    private float _startRotationY;
 
     private int _groundMask;
 
@@ -28,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
     private static readonly int Moving = Animator.StringToHash("moving");
     private static readonly int ActionTrigger = Animator.StringToHash("actionTrigger");
+    private static readonly int YVelocity = Animator.StringToHash("yVelocity");
 
     private bool _turnCoroutineRunning = false;
     private Coroutine _turnCoroutine;
@@ -41,19 +41,18 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         _groundMask = LayerMask.GetMask("Ground");
-
-        _startRotationY = transform.rotation.eulerAngles.y;
     }
 
     /// <summary>
-    /// Checks for input, jumping, action, and flipping.
+    /// Checks for input, jumping, action, and flipping. Sets the yVelocity parameter in the animator.
     /// </summary>
     private void Update()
     {
         GetInput();
         JumpCheck();
-        ActionCheck();
         CheckFlip();
+        ActionCheck();
+        _anim.SetFloat(YVelocity, _rb.velocity.y);
     }
 
     /// <summary>
@@ -114,9 +113,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void CheckFlip()
     {
-        if ((!_facingRight || !(_horizontal < 0)) && (_facingRight || !(_horizontal > 0))) return;
-        _facingRight = !_facingRight;
-        Turn();
+        if (_facingRight && _horizontal < 0f || !_facingRight && _horizontal > 0f)
+        {
+            _facingRight = !_facingRight;
+            Turn();
+        }
     }
 
     /// <summary>
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         _turnCoroutineRunning = true;
         var startRotation = transform.rotation;
-        var endRotation = Quaternion.Euler(0, _facingRight ? _startRotationY : _startRotationY + 180, 0);
+        var endRotation = Quaternion.Euler(0, _facingRight ? 180 : 0, 0);
         var time = 0f;
         while (time < turnTime)
         {
