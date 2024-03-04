@@ -13,6 +13,7 @@ any of the following parameters on the `PlayerController` component:
 - `JumpForce`: The force applied to the character when jumping.
 - `ActionKey`: The keyboard key used to trigger the `PlayerAction` animation.
 - `TurnTime`: The amount of time it takes for the player to rotate 180 degrees when changing the direction of movement.
+- `JumpHoldTime`: The amount of time it takes for the player to start leaving the ground.
 - `GroundCheckSize`: A `Vector3` representing how large the box checking for whether the player is touching the ground is.
 
 Any questions? Ask Mercedes, Jack, or Eric.

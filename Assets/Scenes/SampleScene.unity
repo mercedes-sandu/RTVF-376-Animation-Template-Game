@@ -5959,6 +5959,7 @@ MonoBehaviour:
   jumpForce: 3.75
   actionKey: 101
   turnTime: 0.2
+  jumpHoldTime: 0.1
   groundCheckSize: {x: 1, y: 0.2, z: 1}
 --- !u!54 &1268872645
 Rigidbody:

@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float turnTime;
 
+    [SerializeField] private float jumpHoldTime;
+    
     [SerializeField] private Vector3 groundCheckSize;
 
     private Rigidbody _rb;
@@ -87,8 +89,17 @@ public class PlayerController : MonoBehaviour
         _anim.ResetTrigger(ActionTrigger);
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W))
         {
-            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _anim.Play("PlayerJump");
+            Invoke(nameof(AddJumpForce), jumpHoldTime);
         }
+    }
+
+    /// <summary>
+    /// Adds the jump force to the player's Rigidbody.
+    /// </summary>
+    private void AddJumpForce()
+    {
+        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     /// <summary>
